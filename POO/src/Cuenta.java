@@ -1,6 +1,8 @@
+import java.util.Random;
 
 public class Cuenta {
 
+	static int numeroCuentas=0;
 
 	//atributos
 	private String iban;
@@ -11,9 +13,12 @@ public class Cuenta {
 
 	//metodos
 
-	public Cuenta(String iban,int numeroCuenta, boolean interesMensual) {
+	public Cuenta(String iban,int numeroCuenta, double interesMensual) {
+		this.iban=iban;
+		this.numeroCuenta=numeroCuenta;
+		this.interesMensual=interesMensual;
 
-
+		numeroCuentas++;
 	}
 
 	public String getIban() {
@@ -43,7 +48,7 @@ public class Cuenta {
 		}else {
 			this.saldo=saldo;
 		}
-		
+
 	}
 
 	public double isInteresMensual() {
@@ -53,9 +58,9 @@ public class Cuenta {
 	public void setInteresMensual(double interesMensual) {
 		this.interesMensual = interesMensual;
 	}
-	
-	
-	
+
+
+
 	public void ingresar(double dinero) {
 		if(dinero<0) {
 			System.out.println("cantidad no valida");
@@ -63,61 +68,70 @@ public class Cuenta {
 			System.out.println("transaccion exitosa");
 			saldo=saldo+dinero;
 		}
-		
+
 	}
-	
+
 	public boolean retirar(double dinero) {
 		boolean retirar = true;
-		
-		if(saldo<0) {
+
+		if(saldo<=0) {
 			retirar=false;
-			System.out.println("no se ha podido realizar la operacion");
+
 		}else {
-			System.out.println("se ha realizado de forma correcta");
 			saldo=saldo-dinero;
-			
+
 		}
-		
-		
+
+
 		return retirar;
-		
+
 	}
-	
-	public boolean hacerTransferenciaA(int cuenta ,double cantidad) {
+
+	public boolean hacerTransferenciaA (Cuenta c,double cantidad) {
 		boolean transferencia= true;
-		if(cantidad>saldo) {
+		this.numeroCuenta=numeroCuenta;
+		if(numeroCuenta==numeroCuenta) {
 			transferencia=false;
-			System.out.println("No se puede realizar la operacion");
+		}else if (cantidad>saldo){
+			transferencia=false;
+
 		}else {
-			System.out.println("transferencia realizada a la cuenta "+cuenta);
 			saldo=saldo-cantidad;
+			c.saldo=cantidad;
 		}
-		
 		return transferencia;
-		
-		
+
 	}
+
+
 	
-	public double beneficiosFuturo(int numMeses) {
-		double resultado=0;
-		if(numMeses<0) {
-			resultado=0;
-		}else if(descubierta=true){
-			resultado=0;
-		}else {
-			resultado=numMeses*interesMensual;
-		}
-		
-		return resultado;
-		
+
+
+
+public double beneficiosFuturo(int numMeses) {
+	double resultado=0;
+	if(numMeses<0) {
+		resultado=0;
+	}else if(descubierta=true){
+		resultado=0;
+	}else {
+		resultado=numMeses*interesMensual;
 	}
-	
-	public String paraImprimir() {
-		String resultado="";
-		if()
-		
-		
-		return resultado;
-		
-	}
+
+	return resultado;
+
+}
+
+public String ToString() {
+	String resultado="";
+
+	resultado="Bienvenido!, esta es tu nueva cuenta segun tus datos introducidos \n"
+			+"Este es tu IBAN: "+this.iban+ "\n"
+			+"Este es tu numero de cuenta: "+this.numeroCuenta+"\n"
+			+"Este es tu interes Mensual: "+this.interesMensual;
+
+
+	return resultado;
+
+}
 }
